@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CourseForge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F9FAFB;
+            --surface: #FFFFFF;
+            --border: #E5E7EB;
+            --blue: #2563EB;
+            --blue-hover: #1D4ED8;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --red: #DC2626;
+            --radius: 12px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .login-card {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            background: var(--blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        p.subtitle { color: var(--text-secondary); font-size: 14px; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            font-size: 15px;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-login:hover { background: var(--blue-hover); }
+
+        .error-msg {
+            color: var(--red);
+            font-size: 13px;
+            margin-top: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="header">
+            <div class="logo">CF</div>
+            <h1>Welcome back</h1>
+            <p class="subtitle">Please enter your details to sign in</p>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="password">
+        </div>
+
+        <button class="btn-login" onclick="handleLogin()">Sign in</button>
+        
+        <div id="error" class="error-msg">Invalid email or password. Please try again.</div>
+
+        <div class="footer-note">
+            Username: Email address | Password: Password
+        </div>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('error');
+
+            if (email === 'ameen@gmail.com' && password === '123456') {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.jsx';
+            } else {
+                error.style.display = 'block';
+                setTimeout(() => { error.style.display = 'none'; }, 3000);
+            }
+        }
+
+        // Enter key support
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+</body>
+</html>
